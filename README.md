@@ -1,6 +1,6 @@
-# lab
+# particle-photon
 
-A Particle project named lab
+A Particle project named particle-photon
 
 ## Welcome to your project!
 
