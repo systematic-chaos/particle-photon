@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            const accessToken = 'b4a52798c9c381c1d46ef08b614a735a84405aff';
+            const deviceID = '1e0033001647363335343834';
+            const url = `https://api.particle.io/v1/devices/${deviceID}/morse`;
+            
+            function callback(data, status) {
+                if (data.return_value >= 0) {
+                    alert("Mensaje enviado.\nSímbolos emitidos: " + data.return_value);
+                } else {
+                    alert("No se pudo contactar con el Photon");
+                }
+            }
+            
+            function sendMorse() {
+                const message = $("#message").val();
+                $.post(url, { params: message, access_token: accessToken }, callback);
+            }
+        </script>
+    </head>
+    
+    <body>
+        <h1>Consola remota de Código Morse</h1>
+        <input id="message" value="Hello World" size="64"/>
+        <input type="button" value="Enviar" onclick="sendMorse()"/>
+        <br/>
+    </body>
+</html>
+
