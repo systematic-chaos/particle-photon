@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.5.1/justgage.min.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script>
+            const accessToken = 'b4a52798c9c381c1d46ef08b614a735a84405aff';
+            const deviceID = '1e0033001647363335343834';
+            const url = `https://api.particle.io/v1/devices/${deviceID}/lighting`;
+            
+            function callback(data, status) {
+                if (status === 'success') {
+                    g.refresh(parseFloat(data.result).toFixed(2));
+                    setTimeout(getReading, 5000);
+                } else {
+                    alert('¡Al carajo!');
+                }
+            }
+            
+            function getReading() {
+                $.get(url, { access_token: accessToken }, callback);
+            }
+        </script>
+    </head>
+    
+    <body>
+        <div>
+            <text style="text-align: center; margin: auto; padding-left: 22px; font-family: Arial; font-size: 24px; color: #b3b3b3; font-weight: bold; stroke: none; fill-opacity: 1">
+                <tspan dy="0">Light-o-meter</tspan>
+            </text>
+            <div id="gauge"></div>
+        </div>
+        
+        <script>
+            var g = new JustGage({
+                id: 'gauge',
+                value: 0,
+                min: 0,
+                max: 3.3,
+                decimals: 2,
+                label: 'Volts',
+                title: 'Light-o-meter',
+                height: 160,
+                width: 200
+            });
+            
+            getReading();
+        </script>
+    </body>
+</html>
+
