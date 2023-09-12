@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            const accessToken = 'b4a52798c9c381c1d46ef08b614a735a84405aff';
+            const deviceID = '1e0033001647363335343834';
+            const url = `https://api.particle.io/v1/devices/${deviceID}/ledBlink`;
+            
+            function switchLedBlinking(arg) {
+                $.post(url, { params: arg, access_token: accessToken });
+            }
+                        
+        </script>
+    </head>
+    
+    <body>
+        <h1>On/Off Control</h1>
+        <input type="button" onClick="switchLedBlinking('on')" value="ON"/>
+        <input type="button" onClick="switchLedBlinking('off')" value="OFF"/>
+    </body>
+</html>
+
